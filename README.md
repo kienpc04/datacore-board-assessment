@@ -4,11 +4,11 @@ Hệ thống tự động thu thập, chuẩn hóa và hợp nhất dữ liệu 
 Prerequisites
 Trước khi bắt đầu, hãy đảm bảo bạn đáp ứng các yêu cầu sau:
 
-Đã cài đặt Python 3.10 hoặc phiên bản mới hơn.
+- Đã cài đặt Python 3.10 hoặc phiên bản mới hơn.
 
-Sử dụng hệ điều hành Windows, macOS hoặc Linux.
+- Sử dụng hệ điều hành Windows, macOS hoặc Linux.
 
-Có kiến thức cơ bản về Virtual Environments và Terminal/Command Prompt.
+- Có kiến thức cơ bản về Virtual Environments và Terminal/Command Prompt.
 
 ⚙️ Installation
 Để cài đặt dự án, hãy thực hiện theo các bước sau:
@@ -72,24 +72,25 @@ Phân tích dữ liệu:
 Mở các tệp trong thư mục notebooks/ bằng Jupyter Notebook hoặc VS Code để xem báo cáo EDA.
 
 🧠 Approach & Trade-offs
-Kỹ thuật: Sử dụng Hybrid Fuzzy Matching để xử lý sự sai khác về danh xưng và lỗi Unicode giữa các nguồn.
 
-Đánh đổi: Chấp nhận xóa bỏ hoàn toàn dấu cách và danh xưng trong giai đoạn so khớp để tối đa hóa tỷ lệ khớp (Match Rate), sau đó khôi phục định dạng chuẩn ở bản ghi cuối.
+- Kỹ thuật: Sử dụng Hybrid Fuzzy Matching để xử lý sự sai khác về danh xưng và lỗi Unicode giữa các nguồn.
 
-Hạn chế: Các mã cổ phiếu mới niêm yết (IPO) có thể gặp hiện tượng đơn nguồn (Single Source) do độ trễ cập nhật khác nhau.
+- Đánh đổi: Chấp nhận xóa bỏ hoàn toàn dấu cách và danh xưng trong giai đoạn so khớp để tối đa hóa tỷ lệ khớp (Match Rate), sau đó khôi phục định dạng chuẩn ở bản ghi cuối.
+
+- Hạn chế: Các mã cổ phiếu mới niêm yết (IPO) có thể gặp hiện tượng đơn nguồn (Single Source) do độ trễ cập nhật khác nhau.
 
 🤝 Contributing
 Để đóng góp cho dự án, hãy làm theo các bước sau:
 
-Fork dự án này.
+- Fork dự án này.
 
-Tạo một Branch mới (git checkout -b feature/AmazingFeature).
+- Tạo một Branch mới (git checkout -b feature/AmazingFeature).
 
-Commit các thay đổi của bạn (git commit -m 'Add some AmazingFeature').
+- Commit các thay đổi của bạn (git commit -m 'Add some AmazingFeature').
 
-Push lên branch (git push origin feature/AmazingFeature).
+- Push lên branch (git push origin feature/AmazingFeature).
 
-Mở một Pull Request.
+- Mở một Pull Request.
 
 👥 Contributors
 Nguyễn Trung Kiên - Lead Data Engineer - https://github.com/kienpc04
