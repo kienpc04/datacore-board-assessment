@@ -10,11 +10,11 @@ Hệ thống đã thực hiện gộp dữ liệu từ hai nguồn độc lập 
 
 | Chỉ số thống kê                    | Giá trị | Phân tích chuyên sâu                                |
 | :--------------------------------- | :------ | :-------------------------------------------------- |
-| **Tổng bản ghi CafeF**             | 1140    | Thu thập qua hệ thống cào API động.                 |
-| **Tổng bản ghi Vietstock**         | 828     | Thu thập qua Session/CSRF handling.                 |
-| **Tổng bản ghi Golden (Cuối)**     | 1,111   | Đã qua bước Khử trùng lặp (Deduplication).          |
+| **Tổng bản ghi CafeF**             | 1511    | Thu thập qua hệ thống cào API động.                 |
+| **Tổng bản ghi Vietstock**         | 1127    | Thu thập qua Session/CSRF handling.                 |
+| **Tổng bản ghi Golden (Cuối)**     | 1493    | Đã qua bước Khử trùng lặp (Deduplication).          |
 | **Tỷ lệ khớp (Match Rate)**        | 74.2%   | Phản ánh sự đồng thuận định danh cao giữa 2 nguồn.  |
-| **Tỷ lệ xung đột (Conflict Rate)** | 10.3%   | Ghi nhận 115 trường hợp sai lệch chức vụ nghiệp vụ. |
+| **Tỷ lệ xung đột (Conflict Rate)** | 10.3%   | Ghi nhận 148 trường hợp sai lệch chức vụ nghiệp vụ. |
 
 ## 2. Phân tích thực thể (Entity Matching Analysis)
 

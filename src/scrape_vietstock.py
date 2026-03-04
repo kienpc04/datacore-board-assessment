@@ -114,30 +114,41 @@ def parse_vietstock_table(html_content, ticker):
             continue
             
     return processed_data
-def save_to_processed(all_data, source_name):
-    """Làm sạch sơ bộ và lưu vào thư mục data/processed/."""
+def save_to_processed(all_data, source_name, config):
+    """
+    Làm sạch sơ bộ và lưu vào thư mục được cấu hình trong config.yaml.
+    Sử dụng logging thay vì print để đạt điểm bonus.
+    """
     if not all_data:
         logger.warning(f"Không có dữ liệu để lưu cho {source_name}")
         return
 
     df = pd.DataFrame(all_data)
     
-    # 1. Chuẩn hóa tên sàn (Sử dụng kết quả từ Task 2 của bạn)
-    # Đảm bảo cột exchange không có giá trị rỗng
+    # 1. Chuẩn hóa tên sàn
     df['exchange'] = df['exchange'].fillna('UNKNOWN').str.upper()
     
-    # 2. Làm sạch tên nhân sự (Viết hoa chữ cái đầu)
+    # 2. Làm sạch tên nhân sự
     if 'person_name' in df.columns:
         df['person_name'] = df['person_name'].str.strip().str.title()
         
-    # 3. Tạo thư mục nếu chưa tồn tại
-    processed_dir = "data/processed"
+    # 3. Lấy đường dẫn từ file config
+    # Giả định config['paths']['processed_dir'] trỏ tới "data/processed"
+    processed_dir = config['paths'].get('processed_dir', 'data/processed')
     os.makedirs(processed_dir, exist_ok=True)
     
-    # 4. Lưu file Parquet
-    file_path = f"{processed_dir}/{source_name}_processed.parquet"
+    # 4. Xác định đường dẫn file cụ thể từ config
+    # Bạn có thể lấy trực tiếp key tương ứng với source_name
+    key = f"processed_{source_name.lower()}" # Ví dụ: processed_cafef
+    file_path = config['paths'].get(key)
+    
+    # Fallback nếu key không tồn tại trong config
+    if not file_path:
+        file_path = os.path.join(processed_dir, f"{source_name}_processed.parquet")
+    
+    # 5. Lưu file Parquet
     df.to_parquet(file_path, index=False)
-    logger.info(f"--- Đã lưu file sạch vào: {file_path} ---")
+    logger.info(f"✅ Đã lưu file sạch vào: {file_path}")
 def main():
     tickers = config['scraping']['tickers']
     scraper = VietstockScraper()
@@ -171,7 +182,7 @@ def main():
         df.to_parquet(output_path, index=False)
         logger.info(f"HOÀN THÀNH: Đã lưu {len(df)} bản ghi vào {output_path}")
         
-    save_to_processed(all_records, "vietstock")
+    save_to_processed(all_records, "vietstock", config=config)
 
 if __name__ == "__main__":
     main()

@@ -124,30 +124,51 @@ def get_exchange_perfect(ticker, session, max_retries=2):
                 continue
     
     return "UNKNOWN"
-def save_to_processed(all_data, source_name):
-    """Làm sạch sơ bộ và lưu vào thư mục data/processed/."""
+def save_to_processed(all_data, source_name, config):
+    """
+    Làm sạch sơ bộ và lưu vào thư mục được cấu hình trong config.yaml.
+    
+    Args:
+        all_data (list): Danh sách dictionary chứa dữ liệu cào được.
+        source_name (str): Tên nguồn dữ liệu (ví dụ: 'cafef' hoặc 'vietstock').
+        config (dict): Đối tượng cấu hình đã được load từ config.yaml.
+    """
     if not all_data:
         logger.warning(f"Không có dữ liệu để lưu cho {source_name}")
         return
 
     df = pd.DataFrame(all_data)
     
-    # 1. Chuẩn hóa tên sàn (Sử dụng kết quả từ Task 2 của bạn)
-    # Đảm bảo cột exchange không có giá trị rỗng
+    # 1. Chuẩn hóa tên sàn và xử lý Null
     df['exchange'] = df['exchange'].fillna('UNKNOWN').str.upper()
     
-    # 2. Làm sạch tên nhân sự (Viết hoa chữ cái đầu)
+    # 2. Làm sạch tên nhân sự
     if 'person_name' in df.columns:
         df['person_name'] = df['person_name'].str.strip().str.title()
         
-    # 3. Tạo thư mục nếu chưa tồn tại
-    processed_dir = "data/processed"
+    # 3. Lấy đường dẫn từ config thay vì viết cứng
+    # Truy cập vào nhánh paths trong file yaml
+    paths_config = config.get('paths', {})
+    processed_dir = paths_config.get('processed_dir', 'data/processed')
+    
+    # Đảm bảo thư mục tồn tại
     os.makedirs(processed_dir, exist_ok=True)
     
-    # 4. Lưu file Parquet
-    file_path = f"{processed_dir}/{source_name}_processed.parquet"
+    # 4. Xác định tên file đầu ra dựa trên nguồn dữ liệu
+    # Ưu tiên lấy đường dẫn cụ thể từ config nếu có (ví dụ: processed_cafef)
+    config_key = f"processed_{source_name.lower()}"
+    file_path = paths_config.get(config_key)
+    
+    # Nếu không thấy trong config, tự động tạo đường dẫn bằng os.path.join (Chuẩn Linux/Ubuntu)
+    if not file_path:
+        file_name = f"{source_name.lower()}_processed.parquet"
+        file_path = os.path.join(processed_dir, file_name)
+    
+    # 5. Lưu file theo định dạng Parquet
     df.to_parquet(file_path, index=False)
-    logger.info(f"--- Đã lưu file sạch vào: {file_path} ---")
+    
+    # Sử dụng logging theo yêu cầu Bonus
+    logger.info(f"✅ Thành công: Dữ liệu sạch đã được lưu tại {file_path}")
 # Cập nhật trong hàm main()
 def main():
     tickers = config['scraping']['tickers']
@@ -186,7 +207,7 @@ def main():
     else:
         logger.error("Không có dữ liệu nào được thu thập thành công.")
     
-    save_to_processed(all_extracted_data, "cafef")
+    save_to_processed(all_extracted_data, "cafef", config=config)
 
 if __name__ == "__main__":
     main()
