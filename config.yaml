@@ -1,0 +1,87 @@
+# config.yaml
+project_name: "DataCore Board Assessment"
+version: "1.0.0"
+
+scraping:
+  # Danh sách mã mẫu để demo (Yêu cầu tối thiểu 30)
+  tickers:
+    [
+      "VIN",
+      "FPT",
+      "VNM",
+      "VIC",
+      "MSN",
+      "TCB",
+      "SSI",
+      "HAG",
+      "MWG",
+      "HPG",
+      "DGC",
+      "VRE",
+      "VHM",
+      "GAS",
+      "POW",
+      "SAB",
+      "PLX",
+      "BID",
+      "CTG",
+      "ACB",
+      "VPB",
+      "MBB",
+      "TPB",
+      "HDB",
+      "STB",
+      "VIB",
+      "LPB",
+      "EIB",
+      "SHB",
+      "MSB",
+      "OCB",
+      "PVS",
+      "SHS",
+      "IDC",
+      "HUT",
+      "CEO",
+      "MBS",
+      "VJS",
+      "LAS",
+      "NTP",
+      "VCG",
+      "TNG",
+      "BVS",
+      "VCS",
+      "PGS",
+      "PVC",
+      "PVB",
+      "PLC",
+      "DHT",
+      "TVD",
+      "NBC",
+      "TC6",
+      "TDN",
+      "HLD",
+      "L14",
+      "IDV",
+      "CAP",
+      "CSC",
+      "SLS",
+      "DXP",
+      "GIC",
+    ]
+
+  delay_range: [1.5, 3.0] # Giây (Random delay để tránh bị chặn)
+  timeout: 15
+  user_agents:
+    - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36..."
+    - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36..."
+
+paths:
+  raw_cafef: "data/raw/cafef_board.parquet"
+  raw_vietstock: "data/raw/vietstock_board.parquet"
+  processed_cafef: "data/processed/cafef_processed.parquet"
+  processed_vietstock: "data/processed/vietstock_processed.parquet"
+  final_golden: "data/final/board_golden.parquet"
+
+logging:
+  level: "INFO"
+  log_file: "logs/pipeline.log"

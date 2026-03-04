@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cấu trúc môi trường ảo (Virtual Environments)
+# Rất quan trọng: Không bao giờ push venv lên GitHub
+venv/
+.venv/
+env/
+ENV/
+bin/
+lib/
+develop-eggs/
+dist/
+eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Dữ liệu (Dữ liệu thô và đã xử lý nên để ở máy cục bộ)
+data/raw/*.parquet
+data/processed/*.parquet
+data/final/*.parquet
+
+# Cấu hình IDE (VS Code, PyCharm)
+.vscode/
+.idea/
+
+# File nhật ký (Logs)
+*.log
+
+# File cấu hình nhạy cảm (Nếu có thông tin đăng nhập)
+# .env
+# config_private.yaml
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db
