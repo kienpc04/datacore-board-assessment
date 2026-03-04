@@ -15,25 +15,33 @@ Có kiến thức cơ bản về Virtual Environments và Terminal/Command Promp
 
 Clone dự án hoặc giải nén folder:
 
-Bash
+```Bash
 cd datacore-board-assessment
+```
 
 Thiết lập môi trường ảo:
 
-Bash
+```Bash
 python -m venv venv
+```
 
 # Kích hoạt (Windows)
 
+```Bash
 venv\Scripts\activate
+```
 
 # Kích hoạt (macOS/Linux)
 
+```Bash
 source venv/bin/activate
+```
+
 Cài đặt các thư viện phụ thuộc:
 
-Bash
+```Bash
 pip install -r requirements.txt
+```
 
 🚀 Usage
 Sau khi cài đặt thành công, bạn có thể vận hành Pipeline theo các bước sau:
@@ -41,21 +49,24 @@ Sau khi cài đặt thành công, bạn có thể vận hành Pipeline theo các
 Cào dữ liệu (Task 1 & 2):
 Chạy các script để lấy dữ liệu từ CafeF và Vietstock.
 
-Bash
+```Bash
 python src/scrape_cafef.py
 python src/scrape_vietstock.py
+```
 
 Hợp nhất dữ liệu (Task 3):
 Xử lý logic so khớp thực thể và tạo file kết quả cuối cùng.
 
-Bash
+```Bash
 python src/merge.py
+```
 
 Kiểm thử hệ thống (Task 4):
 Chạy bộ Unit Test để đảm bảo tính toàn vẹn của logic.
 
-Bash
+```Bash
 pytest -v
+```
 
 Phân tích dữ liệu:
 Mở các tệp trong thư mục notebooks/ bằng Jupyter Notebook hoặc VS Code để xem báo cáo EDA.
